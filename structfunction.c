@@ -1,0 +1,39 @@
+#include <stdio.h>
+
+typedef struct
+{
+    double time;
+    double voltage;
+    double current;
+} ElectricalMeasurement;
+
+double power(const ElectricalMeasurement *m)
+{
+    return m->voltage * m->current;
+}
+
+int main(void)
+{
+    ElectricalMeasurement measurements[] =
+    {
+        {0.0, 5.0, 2.0},
+        {1.0, 5.5, 2.1},
+        {2.0, 6.0, 2.2},
+        {3.0, 6.5, 2.3}
+    };
+
+    int n = sizeof(measurements) / sizeof(measurements[0]);
+
+    for (int i = 0; i < n; i++)
+    {
+        double p = power(&measurements[i]);
+
+        printf("t = %.1f s, V = %.2f V, I = %.2f A, P = %.2f W\n",
+               measurements[i].time,
+               measurements[i].voltage,
+               measurements[i].current,
+               p);
+    }
+
+    return 0;
+}
